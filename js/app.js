@@ -19,6 +19,7 @@
 */
 const sections = document.querySelectorAll('section');
 const navList = document.querySelector('#navbar__list');
+const scrollToTopButton = document.querySelector('#scroll-to-top');
 
 /**
  * End Global Variables
@@ -50,7 +51,7 @@ function fillNav(){
 }
 
 // Add class 'active' to section when near top of viewport
-function handleActive(){
+function handleScroll(){
     let oneIsActive = false;
     let count = 0;
     for(let section of sections){
@@ -65,6 +66,15 @@ function handleActive(){
         }
         count++;
     }
+    console.log(document.body.scrollTop);
+    console.log(document.documentElement.scrollTop);
+    if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0){
+        scrollToTopButton.classList.add('active');
+    }
+    else{
+        scrollToTopButton.classList.remove('active');
+    }
+
 }
 
 // Scroll to anchor ID using scrollTO event
@@ -84,6 +94,7 @@ function scrollToSection(navItem){
 document.addEventListener('DOMContentLoaded', function () {
     fillNav();
     initNavClicks();
+    initScrollToTop();
 });
 
 // Scroll to section on link click
@@ -99,4 +110,13 @@ function initNavClicks(){
 }
 
 // Set sections as active
-window.addEventListener("scroll", handleActive);
+window.addEventListener("scroll", handleScroll);
+
+// Scroll to Top function
+function initScrollToTop(){
+    scrollToTopButton.addEventListener("click", function(){
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        //document.body.scrollTop = 0; // For Safari
+        //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+}

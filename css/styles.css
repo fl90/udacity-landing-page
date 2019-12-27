@@ -109,6 +109,23 @@ section {
     color: #fff;
 }
 
+/* Scroll To Top Button Styles */
+#scroll-to-top {
+    bottom: 20px;
+    background-color: black;
+    padding: 15px;
+    border-radius: 10px;
+    position: fixed;
+    color: white;
+    right: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+#scroll-to-top.active{
+    display: block;
+}
+
 
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */

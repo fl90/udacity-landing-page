@@ -26,6 +26,8 @@ const navList = document.querySelector('#navbar__list');
  * 
 */
 
+let navElementList = [];
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -50,22 +52,24 @@ function fillNav(){
 // Add class 'active' to section when near top of viewport
 function handleActive(){
     let oneIsActive = false;
+    let count = 0;
     for(let section of sections){
-        if((window.scrollY + navList.offsetHeight)< (section.offsetTop + section.offsetHeight) && !oneIsActive) {
+        if((window.scrollY + navList.offsetHeight) < (section.offsetTop + section.offsetHeight) && !oneIsActive) {
             oneIsActive = true;
             section.classList.add('active');
+            navElementList[count].classList.add('active');
         }
         else {
             section.classList.remove('active');
+            navElementList[count].classList.remove('active');
         }
+        count++;
     }
 }
 
 // Scroll to anchor ID using scrollTO event
 function scrollToSection(navItem){
-    console.log(navItem.offsetHeight);
     const sectionId = navItem.textContent.replace(/\s/g, '').toLowerCase();
-    console.log(sectionId);
     const section = document.getElementById(sectionId);
     window.scrollTo({top: section.offsetTop, left: 0, behavior: 'smooth'});
 }
@@ -85,6 +89,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // Scroll to section on link click
 function initNavClicks(){
     for (let navItem of navList.querySelectorAll('.menu__link')){
+        // add each menu item to a list
+        navElementList.push(navItem);
+        // add to each menu item an event listener which handles the scrolling
         navItem.addEventListener("click", function(){
             scrollToSection(navItem);
         });

@@ -17,9 +17,9 @@
  * Define Global Variables
  * 
 */
-const sections = document.querySelectorAll('section');
-const navList = document.querySelector('#navbar__list');
-const scrollToTopButton = document.querySelector('#scroll-to-top');
+let sections = document.querySelectorAll('section');
+let navList = document.querySelector('#navbar__list');
+let scrollToTopButton = document.querySelector('#scroll-to-top');
 
 /**
  * End Global Variables
@@ -66,8 +66,6 @@ function handleScroll(){
         }
         count++;
     }
-    console.log(document.body.scrollTop);
-    console.log(document.documentElement.scrollTop);
     if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0){
         scrollToTopButton.classList.add('active');
     }
@@ -92,9 +90,23 @@ function scrollToSection(navItem){
 
 // Build menu 
 document.addEventListener('DOMContentLoaded', function () {
+    const startingTime = performance.now();
+
+    sections = document.querySelectorAll('section');
+    navList = document.querySelector('#navbar__list');
+    scrollToTopButton = document.querySelector('#scroll-to-top');
+
     fillNav();
     initNavClicks();
     initScrollToTop();
+
+    initCollapsable();
+
+    const endingTime = performance.now();
+    console.log('This code took ' + (endingTime - startingTime) + ' milliseconds.');
+
+    // the loading before the body took 0.6049999501556158 milliseconds
+    // if i move the script to the bottom it took 0.5449999589473009 milliseconds
 });
 
 // Scroll to section on link click
@@ -105,6 +117,16 @@ function initNavClicks(){
         // add to each menu item an event listener which handles the scrolling
         navItem.addEventListener("click", function(){
             scrollToSection(navItem);
+        });
+    }
+}
+
+function initCollapsable(){
+    let sectionHeader = document.querySelectorAll(".section-header");
+    for(let header of sectionHeader){
+        header.addEventListener("click", function (){
+            let sibling = header.parentElement.querySelector(".section-content");
+            sibling.classList.toggle("collapsed");
         });
     }
 }

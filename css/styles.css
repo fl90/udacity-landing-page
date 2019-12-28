@@ -57,7 +57,7 @@ main {
 
 section {
     position: relative;
-    min-height: 80vh;
+    /*min-height: 80vh;*/
 }
 
 
@@ -126,6 +126,18 @@ section {
     display: block;
 }
 
+/* Section styles */
+.section-content {
+    display: block;
+}
+
+.section-content.collapsed{
+    display: none;
+}
+
+.section-header {
+    cursor: pointer;
+}
 
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */

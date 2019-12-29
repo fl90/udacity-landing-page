@@ -36,7 +36,7 @@ let navElementList = [];
 */
 
 // build the nav
-function fillNav(){
+fillNav = () => {
     let navElements = document.createDocumentFragment();
     for (let section of sections){
         const navElement = document.createElement('li');
@@ -51,7 +51,7 @@ function fillNav(){
 }
 
 // Add class 'active' to section when near top of viewport
-function handleScroll(){
+handleScroll = () => {
     let oneIsActive = false;
     let count = 0;
     for(let section of sections){
@@ -76,7 +76,7 @@ function handleScroll(){
 }
 
 // Scroll to anchor ID using scrollTO event
-function scrollToSection(navItem){
+scrollToSection = (navItem) =>{
     const sectionId = navItem.textContent.replace(/\s/g, '').toLowerCase();
     const section = document.getElementById(sectionId);
     window.scrollTo({top: section.offsetTop, left: 0, behavior: 'smooth'});
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Scroll to section on link click
-function initNavClicks(){
+initNavClicks = () => {
     for (let navItem of navList.querySelectorAll('.menu__link')){
         // add each menu item to a list
         navElementList.push(navItem);
@@ -121,7 +121,7 @@ function initNavClicks(){
     }
 }
 
-function initCollapsable(){
+initCollapsable = () => {
     let sectionHeader = document.querySelectorAll(".section-header");
     for(let header of sectionHeader){
         header.addEventListener("click", function (){
@@ -135,7 +135,7 @@ function initCollapsable(){
 window.addEventListener("scroll", handleScroll);
 
 // Scroll to Top function
-function initScrollToTop(){
+initScrollToTop = () => {
     scrollToTopButton.addEventListener("click", function(){
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
         //document.body.scrollTop = 0; // For Safari
